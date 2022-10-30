@@ -1,0 +1,45 @@
+---
+id: overview
+title: Overview
+---
+
+import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
+export const Highlight = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "2px",
+      color: "#fff",
+      padding: "0.2rem",
+    }}
+  >
+    {children}
+  </span>
+);
+
+**Group Game Group Pay** (mentioned as **GGGPay**) Open APIs allow developers to manage transactions, mainly focusing on both Payment and Payout through RESTful API or SDK. All GGGPay products have API for most of its core functionalities. Start with our comprehensive API to reimagine your business.
+
+## API Environment Summary
+
+There are two environments provided to test out functionalities and also to ensure integrations are done seamlessly, there are **Sandbox** Environment and **Production** Environment.
+
+### Sandbox Environment
+
+Login Dashboard -> https://merchant.gggpay.org <br />
+API Server -> https://api.gggpay.org <br />
+
+### Production Environment
+
+Login Dashboard -> https://merchant.gggpay.org
+API Server -> https://api.gggpay.org
+
+**Before You Start**
+
+Go to [Merchant Portal](https://merchant.gggpay.org) to sign up as merchant.
+
+Submit all required documents as shown in the merchant portal and get approval from our admin. If you need more assistance, please contact us at <hello@gggpay.org>.
+
+:::note
+The following steps document the RESTful API. For language specific
+SDK(s), please refer to the [SDK section](../quickstart/sdk).
+:::
