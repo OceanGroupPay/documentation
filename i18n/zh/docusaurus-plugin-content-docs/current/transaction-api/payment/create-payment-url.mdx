@@ -1,5 +1,5 @@
 ---
-title: Create Payout/ Withdraw Request
+title: 创建付款链接
 ---
 
 ### 第 1 步：获取访问令牌
@@ -15,54 +15,53 @@ title: Create Payout/ Withdraw Request
 | `nonceStr`  | String |   是    | 随机字符串             | 7a70f55482a5566c |
 | `timestamp` | String |   是    | UNIX格式的 请求的时间戳  |  1667061151361   |
 
-#### 请求参数
+#### 创建付款 URL 示例
 
 | 参数   |  类型  | 必填 | 说明               |     示例      |
 | :---------- | :----: | :------: | :------------------------ | :--------------: |
-| `order`     | Object |   是    | 订单信息，对象字段为 <br />[id, amount, currencyType]  |  |
-| `recipient`  | Object |   是    | 收款人信息, 对象字段为 <br />[name, phone, email, methodType, methodValue, methodRef] |  |
+| `order`     | Object |   是    | 订单信息，对象字段为 <br />[id, title, amount, currencyType, additionalData]  |  |
+| `customer`  | Object |   是    | 客户信息，对象字段为 <br />[name, phone, email] |  |
+| `method`    | String |   否     | 列表 [支付列表](/docs/appendix/payment-method), 如果传入接口是有提供，用户将被直接重定向到特定的第 3 方支付页面。 如果没有，用户将被重定向到付款页面以选择付款方式 |  |
 
 #### Order [Object]
-| 参数   |  类型  | 必填 | 说明               |     示例      |
+| 参数        | 类型   | 必填 | 说明                                                                                       | 示例                        |
 | ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `amount`         | String   | 是      | 数额。 100 = RM 100.00 | 100                            |
-| `currencyType`   | String | 是      | 币种 (目前只支持 `MYR`)                                             | "MYR"                          |
-| `id`             | String | 是 | "6170506694335521334"                                                                             |
+| `title`          | String | 是      | 标题, max: 32                                                                              | "Sales"                        |
+| `additionalData` | String | 否       | 说明                                                                                | "Sales"                        |
+| `amount`         | String | 是    | 数额。 100 = RM 100.00 | 100  
+| `currencyType`   | String | 是      | 币种 (目前只支持 `MYR`)                                                  | "MYR"                          |
+| `id`             | String | 是 | "6170506694335521334"
 
-#### Recipient [Object]
-| 参数   |  类型  | 必填 | 说明               |     示例      |
+#### Customer [Object]
+| 参数     | 类型   | 必填 | 说明                            | 示例    |
 | ------------- | ------ | -------- | -------------------------------------- | ---------- |
-| `name`      | String | 是      | 客户名字| "Leon Tan" |
-| `email`       | String | 是 | 客户邮箱                         | ""         |
-| `phone` | String | 是 | 客户电话                 | ""         |
-| `methodType` | String | 是 | 列表 [支付列表](/docs/appendix/payment-method)                 | ""         |
-| `methodValue` | String | 是 |                  | ""         |
-| `methodRef` | String | 是 | 如果有任何其他信息，例如 PASSPORT 将需要 COUNTRY_CODE  | "" |
+| `name`      | String | 是      | 名字| "Leon Tan" |
+| `email`       | String | 是 | 邮箱                       | ""         |
+| `phone` | String | 是 | 电话号码                 | ""         |
 
 > 请求示例
 
 ```json
 {
   "order": {
-    "id": "10006",
-    "amount": "1",
-    "currencyType": "MYR"
+    "id": "A20221111",
+    "title": "Payment",
+    "amount": "88.50",
+    "currencyType": "MYR",
+    "additionalData": ""
   },
-  "recipient": {
+  "customer": {
     "name": "Leon Tan",
     "phone": "0123456789",
-    "email": "leon@gggpay.org",
-    "methodType": "CIBBMYKL",
-    "methodValue": "7048880588",
-    "methodRef": ""
-  }
+    "email": "leon@gggpay.org"
+  },
+  "method": "FPX"
 }
-
 ```
 
 对上面的json键**按字母顺序**排序并使其**紧凑**
 :::info
-{"order":{"id":"10006","amount":"1","currencyType":"MYR"},"recipient":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org","methodType":"CIBBMYKL","methodValue":"7048880588","methodRef":""}}
+{"customer":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org"},"method":"FPX","order":{"id":"A20221111","title":"Payment","amount":"88.50","currencyType":"MYR","additionalData":""}}
 :::
 
 
@@ -83,10 +82,10 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 请参阅 [签名算法](/docs/credential/signature-algorithm) 关于如何获取 `签名`，然后将其放入请求 Headers头部 的 **X-Signature** 中。
 
-### 第 4 步：POST 到 `/gggpay/withdrawRequest` 接口
+### 第 4 步：POST 到 `/gggpay/createOrder` 接口
 
 **方式 :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-**接口:** https://api.gggpay.org/gggpay/withdrawRequest
+**接口:** https://api.gggpay.org/gggpay/createOrder
 
 ### 请求
 
@@ -152,8 +151,8 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 ```
 {
   "data": {
-    "transactionId": "10535",
+    "paymentUrl": "https://api.gggpay.org/checkout/payment?orderId=4cdcd4e7a712071ef54f83780b8bbd40",
+    "transactionId": "10535"
   }
 }
-
 ```

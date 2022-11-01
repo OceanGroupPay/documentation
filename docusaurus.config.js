@@ -24,7 +24,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'zh'],
   },
 
   presets: [
@@ -39,6 +39,7 @@ const config = {
           editUrl:
             'https://github.com/GoodGameGroupPay/documentation',
         },
+        blog: false,
         // blog: {
         //   showReadingTime: true,
         //   // Please change this to your repo.

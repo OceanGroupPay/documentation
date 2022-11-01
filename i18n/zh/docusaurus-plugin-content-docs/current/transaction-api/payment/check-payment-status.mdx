@@ -1,12 +1,12 @@
 ---
-title: Create Payout/ Withdraw Request
+title: 查看付款状态
 ---
 
 ### 第 1 步：获取访问令牌
 
 `访问令牌`的获取方法请参考[访问令牌](/docs/credential/access-token)，然后放入请求Headers头部的**Authorization**字段。
 
-### 第 2 步：准备请求参数
+### Step 2: Prepare Request Parameter
 
 生成 `nonceStr` 和 `timestamp`，它们将被放入请求 Headers头部 并用于创建 **签名**。
 
@@ -19,50 +19,22 @@ title: Create Payout/ Withdraw Request
 
 | 参数   |  类型  | 必填 | 说明               |     示例      |
 | :---------- | :----: | :------: | :------------------------ | :--------------: |
-| `order`     | Object |   是    | 订单信息，对象字段为 <br />[id, amount, currencyType]  |  |
-| `recipient`  | Object |   是    | 收款人信息, 对象字段为 <br />[name, phone, email, methodType, methodValue, methodRef] |  |
-
-#### Order [Object]
-| 参数   |  类型  | 必填 | 说明               |     示例      |
-| ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `amount`         | String   | 是      | 数额。 100 = RM 100.00 | 100                            |
-| `currencyType`   | String | 是      | 币种 (目前只支持 `MYR`)                                             | "MYR"                          |
-| `id`             | String | 是 | "6170506694335521334"                                                                             |
-
-#### Recipient [Object]
-| 参数   |  类型  | 必填 | 说明               |     示例      |
-| ------------- | ------ | -------- | -------------------------------------- | ---------- |
-| `name`      | String | 是      | 客户名字| "Leon Tan" |
-| `email`       | String | 是 | 客户邮箱                         | ""         |
-| `phone` | String | 是 | 客户电话                 | ""         |
-| `methodType` | String | 是 | 列表 [支付列表](/docs/appendix/payment-method)                 | ""         |
-| `methodValue` | String | 是 |                  | ""         |
-| `methodRef` | String | 是 | 如果有任何其他信息，例如 PASSPORT 将需要 COUNTRY_CODE  | "" |
+| `transactionId`     | String |   是    | 交易ID |  |
+| `type`  | String |   是    | [1 = 付款, 2 = 提款] | 1 |
 
 > 请求示例
 
 ```json
 {
-  "order": {
-    "id": "10006",
-    "amount": "1",
-    "currencyType": "MYR"
-  },
-  "recipient": {
-    "name": "Leon Tan",
-    "phone": "0123456789",
-    "email": "leon@gggpay.org",
-    "methodType": "CIBBMYKL",
-    "methodValue": "7048880588",
-    "methodRef": ""
-  }
+  "transactionId": "10310",
+  "type": 1
 }
 
 ```
 
 对上面的json键**按字母顺序**排序并使其**紧凑**
 :::info
-{"order":{"id":"10006","amount":"1","currencyType":"MYR"},"recipient":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org","methodType":"CIBBMYKL","methodValue":"7048880588","methodRef":""}}
+{"transactionId": "10310", "type": 1}
 :::
 
 
@@ -83,10 +55,10 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 请参阅 [签名算法](/docs/credential/signature-algorithm) 关于如何获取 `签名`，然后将其放入请求 Headers头部 的 **X-Signature** 中。
 
-### 第 4 步：POST 到 `/gggpay/withdrawRequest` 接口
+### 第 4 步：POST 到 `/gggpay/getTransactionStatusById` 接口
 
 **方式 :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-**接口:** https://api.gggpay.org/gggpay/withdrawRequest
+**接口:** https://api.gggpay.org/gggpay/getTransactionStatusById
 
 ### 请求
 
@@ -152,8 +124,24 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 ```
 {
   "data": {
-    "transactionId": "10535",
+      "status": "SUCCESS",
+      "transaction": {
+          "id": 10310,
+          "amountPaid": 124.1,
+          "confirmedAt": "2022-10-28T16:15:58.314Z",
+          "paymentMethod": "FPX",
+          "commissionFee": 3.1025
+      },
+      "order": {
+          "id": "20220918020002",
+          "amount": 124.1,
+          "currencyType": "MYR"
+      },
+      "customer": {
+          "name": "114",
+          "phone": "0123456789",
+          "email": "leon@gggpay.org"
+      }
   }
 }
-
 ```

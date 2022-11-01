@@ -1,5 +1,5 @@
 ---
-title: Check Payment Status
+title: Create Payout/ Withdraw Request
 ---
 
 ### Step 1: Get Access Token
@@ -13,28 +13,56 @@ Generate `nonceStr` and `timestamp`, which will be placed into Request Headers a
 | Parameter   |  Type  | Required | Description               |     Example      |
 | :---------- | :----: | :------: | :------------------------ | :--------------: |
 | `nonceStr`  | String |   Yes    | Random String             | 7a70f55482a5566c |
-| `timestamp` | String |   Yes    | UNIX timestamp of request |  1667061151361   |
+| `timestmap` | String |   Yes    | UNIX timestamp of request |  1667061151361   |
 
 #### Request Parameters
 
 | Parameter   |  Type  | Required | Description               |     Example      |
 | :---------- | :----: | :------: | :------------------------ | :--------------: |
-| `transactionId`     | String |   Yes    | ID of the transaction |  |
-| `type`  | String |   Yes    | [1 = Payment, 2 = Payout] | 1 |
+| `order`     | Object |   Yes    | order information, with keys of <br />[id, amount, currencyType]  |  |
+| `recipient`  | Object |   Yes    | Recipient information, with keys of <br />[name, phone, email, methodType, methodValue, methodRef] |  |
+
+#### Order [Object]
+| Parameter        | Type   | Required | Description                                                                                       | Example                        |
+| ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `amount`         | String   | Yes      | Amount of order in Dollar. 100 = RM 100.00 | 100                            |
+| `currencyType`   | String | Yes      | Currency notation (currently only support `MYR`)                                                  | "MYR"                          |
+| `id`             | String | Yes | "6170506694335521334"                                                                             |
+
+#### Recipient [Object]
+| Parameter     | Type   | Required | Description                            | Example    |
+| ------------- | ------ | -------- | -------------------------------------- | ---------- |
+| `name`      | String | Yes      | Customer Name| "13245876" |
+| `email`       | String | Yes | Customer Email                         | ""         |
+| `phone` | String | Yes | Customer Phone Number                  | ""         |
+| `methodType` | String | Yes | Type of Method, please refer to [Payment List](/docs/appendix/payment-method)                 | ""         |
+| `methodValue` | String | Yes | Refer to Bank Account                  | ""         |
+| `methodRef` | String | Yes | If there is any additional information, such as PASSPORT would require COUNTRY_CODE  | "" |
 
 > Example Request
 
 ```json
 {
-  "transactionId": "10310",
-  "type": 1
+  "order": {
+    "id": "10006",
+    "amount": "1",
+    "currencyType": "MYR"
+  },
+  "recipient": {
+    "name": "Leon Tan",
+    "phone": "0123456789",
+    "email": "leon@gggpay.org",
+    "methodType": "CIBBMYKL",
+    "methodValue": "7048880588",
+    "methodRef": ""
+  }
 }
 
 ```
 
 Sort the above json key **alphabetically** and make it **compact**
 :::info
-{"transactionId": "10310", "type": 1}
+{"order":{"id":"10006","amount":"1","currencyType":"MYR"},"recipient":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org","methodType":"CIBBMYKL","methodValue":"7048880588","methodRef":""}}
 :::
 
 
@@ -55,10 +83,10 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 Please refer to [Signature Algorithm](/docs/credential/signature-algorithm) on how to get `Signature`, and then place it into Request Headers' **X-Signature**.
 
-### Step 4: POST to `/gggpay/getTransactionStatusById` endpoint
+### Step 4: POST to `/gggpay/withdrawRequest` endpoint
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-**Endpoint:** https://api.gggpay.org/gggpay/getTransactionStatusById
+**Endpoint:** https://api.gggpay.org/gggpay/withdrawRequest
 
 ### Request
 
@@ -124,24 +152,8 @@ The result is in plaintext as
 ```
 {
   "data": {
-      "status": "SUCCESS",
-      "transaction": {
-          "id": 10310,
-          "amountPaid": 124.1,
-          "confirmedAt": "2022-10-28T16:15:58.314Z",
-          "paymentMethod": "FPX",
-          "commissionFee": 3.1025
-      },
-      "order": {
-          "id": "20220918020002",
-          "amount": 124.1,
-          "currencyType": "MYR"
-      },
-      "customer": {
-          "name": "114",
-          "phone": "0123456789",
-          "email": "leon@gggpay.org"
-      }
+    "transactionId": "10535",
   }
 }
+
 ```

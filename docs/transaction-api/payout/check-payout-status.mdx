@@ -13,7 +13,7 @@ Generate `nonceStr` and `timestamp`, which will be placed into Request Headers a
 | Parameter   |  Type  | Required | Description               |     Example      |
 | :---------- | :----: | :------: | :------------------------ | :--------------: |
 | `nonceStr`  | String |   Yes    | Random String             | 7a70f55482a5566c |
-| `timestmap` | String |   Yes    | UNIX timestamp of request |  1667061151361   |
+| `timestamp` | String |   Yes    | UNIX timestamp of request |  1667061151361   |
 
 #### Request Parameters
 
@@ -55,7 +55,7 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 Please refer to [Signature Algorithm](/docs/credential/signature-algorithm) on how to get `Signature`, and then place it into Request Headers' **X-Signature**.
 
-### Step 4: POST to `/gggpay/createOrder` endpoint
+### Step 4: POST to `/gggpay/getTransactionStatusById` endpoint
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
 **Endpoint:** https://api.gggpay.org/gggpay/getTransactionStatusById
