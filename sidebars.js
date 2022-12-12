@@ -44,7 +44,6 @@ const sidebars = {
     ],
     Appendix: [
       'appendix/error-code',
-      'appendix/bank-code',
       'appendix/payment-method',
     ],
   },

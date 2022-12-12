@@ -55,10 +55,10 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 请参阅 [签名算法](/docs/credential/signature-algorithm) 关于如何获取 `签名`，然后将其放入请求 Headers头部 的 **X-Signature** 中。
 
-### 第 4 步：POST 到 `/gggpay/getTransactionStatusById` 接口
+### 第 4 步：POST 到 `/gggpay/v1/getTransactionStatusById` 接口
 
 **方式 :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-**接口:** https://api.gggpay.org/gggpay/getTransactionStatusById
+**接口:** https://api.gggpay.org/gggpay/v1/getTransactionStatusById
 
 ### 请求
 
@@ -129,7 +129,7 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
           "id": 10310,
           "amountPaid": 124.1,
           "confirmedAt": "2022-10-28T16:15:58.314Z",
-          "paymentMethod": "FPX",
+          "paymentMethod": "CIMB_MY",
           "commissionFee": 3.1025
       },
       "order": {

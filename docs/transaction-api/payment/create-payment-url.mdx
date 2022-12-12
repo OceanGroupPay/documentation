@@ -55,13 +55,13 @@ Generate `nonceStr` and `timestamp`, which will be placed into Request Headers a
     "phone": "0123456789",
     "email": "leon@gggpay.org"
   },
-  "method": "FPX"
+  "method": "CIMB_MY"
 }
 ```
 
 Sort the above json key **alphabetically** and make it **compact**
 :::info
-{"customer":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org"},"method":"FPX","order":{"id":"A20221111","title":"Payment","amount":"88.50","currencyType":"MYR","additionalData":""}}
+{"customer":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org"},"method":"CIMB_MY","order":{"id":"A20221111","title":"Payment","amount":"88.50","currencyType":"MYR","additionalData":""}}
 :::
 
 
@@ -82,10 +82,10 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 Please refer to [Signature Algorithm](/docs/credential/signature-algorithm) on how to get `Signature`, and then place it into Request Headers' **X-Signature**.
 
-### Step 4: POST to `/gggpay/createOrder` endpoint
+### Step 4: POST to `/gggpay/v1/createOrder` endpoint
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-**Endpoint:** https://api.gggpay.org/gggpay/createOrder
+**Endpoint:** https://api.gggpay.org/gggpay/v1/createOrder
 
 ### Request
 

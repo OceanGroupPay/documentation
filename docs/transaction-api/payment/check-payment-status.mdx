@@ -55,10 +55,10 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 Please refer to [Signature Algorithm](/docs/credential/signature-algorithm) on how to get `Signature`, and then place it into Request Headers' **X-Signature**.
 
-### Step 4: POST to `/gggpay/getTransactionStatusById` endpoint
+### Step 4: POST to `/gggpay/v1/getTransactionStatusById` endpoint
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-**Endpoint:** https://api.gggpay.org/gggpay/getTransactionStatusById
+**Endpoint:** https://api.gggpay.org/gggpay/v1/getTransactionStatusById
 
 ### Request
 
@@ -129,7 +129,7 @@ The result is in plaintext as
           "id": 10310,
           "amountPaid": 124.1,
           "confirmedAt": "2022-10-28T16:15:58.314Z",
-          "paymentMethod": "FPX",
+          "paymentMethod": "CIMB_MY",
           "commissionFee": 3.1025
       },
       "order": {

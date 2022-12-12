@@ -55,13 +55,13 @@ title: 创建付款链接
     "phone": "0123456789",
     "email": "leon@gggpay.org"
   },
-  "method": "FPX"
+  "method": "CIMB_MY"
 }
 ```
 
 对上面的json键**按字母顺序**排序并使其**紧凑**
 :::info
-{"customer":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org"},"method":"FPX","order":{"id":"A20221111","title":"Payment","amount":"88.50","currencyType":"MYR","additionalData":""}}
+{"customer":{"name":"Leon Tan","phone":"0123456789","email":"leon@gggpay.org"},"method":"CIMB_MY","order":{"id":"A20221111","title":"Payment","amount":"88.50","currencyType":"MYR","additionalData":""}}
 :::
 
 
@@ -82,10 +82,10 @@ e4e9ac1120ed867a7af108af8b1ab9183319f8a334bcdbbea47232359ae0a5c9c4ad1e46450ef4b3
 
 请参阅 [签名算法](/docs/credential/signature-algorithm) 关于如何获取 `签名`，然后将其放入请求 Headers头部 的 **X-Signature** 中。
 
-### 第 4 步：POST 到 `/gggpay/createOrder` 接口
+### 第 4 步：POST 到 `/gggpay/v1/createOrder` 接口
 
 **方式 :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-**接口:** https://api.gggpay.org/gggpay/createOrder
+**接口:** https://api.gggpay.org/gggpay/v1/createOrder
 
 ### 请求
 
