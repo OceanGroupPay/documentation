@@ -26,11 +26,11 @@ title: 创建付款链接
 #### Order [Object]
 | 参数        | 类型   | 必填 | 说明                                                                                       | 示例                        |
 | ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `title`          | String | 是      | 标题, max: 32                                                                              | "Sales"                        |
-| `additionalData` | String | 否       | 说明                                                                                | "Sales"                        |
+| `title`          | String | 是      | 标题, max: 32                                                                              | "Deposit"                        |
+| `additionalData` | String | 否       | 说明                                                                                |                       |
 | `amount`         | String | 是    | 数额。 100 = RM 100.00 | 100  
-| `currencyType`   | String | 是      | 币种 (目前只支持 `MYR`)                                                  | "MYR"                          |
-| `id`             | String | 是 | "6170506694335521334"
+| `currencyType`   | String | 是      | 币种 (目前只支持 `MYR` , `CRYPTO`)                                                  | "MYR"                          |
+| `id`             | String | 是 | 订单ID
 
 #### Customer [Object]
 | 参数     | 类型   | 必填 | 说明                            | 示例    |

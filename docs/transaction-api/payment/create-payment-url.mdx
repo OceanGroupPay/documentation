@@ -26,11 +26,11 @@ Generate `nonceStr` and `timestamp`, which will be placed into Request Headers a
 #### Order [Object]
 | Parameter        | Type   | Required | Description                                                                                       | Example                        |
 | ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `title`          | String | Yes      | Order title, max: 32                                                                              | "Sales"                        |
-| `additionalData` | String | No      | Order description                                                                                 | "Sales"                        |
+| `title`          | String | Yes      | Order title, max: 32                                                                              | "Deposit"                        |
+| `additionalData` | String | No      | Order description                                                                                 |                         |
 | `amount`         | String   | Yes      | Amount of order in Dollar. 100 = RM 100.00 | 100                            |
-| `currencyType`   | String | Yes      | Currency notation (currently only support `MYR`)                                                  | "MYR"                          |
-| `id`             | String | Yes | "6170506694335521334"                                                                             |
+| `currencyType`   | String | Yes      | Currency notation (currently only support `MYR` or `CRYPTO`)                                      | "MYR"                          |
+| `id`             | String | Yes | ID of the Order                                                                             |
 
 #### Customer [Object]
 | Parameter     | Type   | Required | Description                            | Example    |
