@@ -33,6 +33,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 解密后获取值为
 
+
 ```
 {
   "message": "Success",
@@ -40,16 +41,73 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
       "status": "PENDING",
       "transaction": {
           "id": 10025,
-          "amountWithdraw": 0,
+          "amountWithdrawn": 0,
           "confirmedAt": 0,
           "commissionFee": 0
       },
+      "order": {
+          "id": "20220918020002",
+          "amount": 124.1,
+          "currencyType": "MYR"
+      },
       "recipient": {
           "name": "Leon Tan",
-          "phone": "0172782671",
-          "email": "plztellmewhy1015@hotmail.com",
+          "phone": "0123456789",
+          "email": "leon@gggpay.org",
           "methodType": "CIBBMYKL",
-          "methodValue": "7042590588",
+          "methodValue": "7088888588",
+          "methodRef": ""      
+      }
+  }
+}
+
+{
+  "message": "Success",
+  "data": {
+      "status": "FAILED",
+      "transaction": {
+          "id": 10025,
+          "amountWithdrawn": 0,
+          "confirmedAt": "2023-02-17T06:18:21.866Z",,
+          "commissionFee": 0
+      },
+      "order": {
+          "id": "20220918020002",
+          "amount": 124.1,
+          "currencyType": "MYR"
+      },
+      "recipient": {
+          "name": "Leon Tan",
+          "phone": "0123456789",
+          "email": "leon@gggpay.org",
+          "methodType": "CIBBMYKL",
+          "methodValue": "7088888588",
+          "methodRef": ""      
+      }
+  }
+}
+
+{
+  "message": "Success",
+  "data": {
+      "status": "SUCCESS",
+      "transaction": {
+          "id": 10025,
+          "amountWithdrawn": 124.1,
+          "confirmedAt": "2023-02-17T06:18:21.866Z",
+          "commissionFee": 1.1
+      },
+      "order": {
+          "id": "20220918020002",
+          "amount": 124.1,
+          "currencyType": "MYR"
+      },
+      "recipient": {
+          "name": "Leon Tan",
+          "phone": "0123456789",
+          "email": "leon@gggpay.org",
+          "methodType": "CIBBMYKL",
+          "methodValue": "7088888588",
           "methodRef": ""      
       }
   }
