@@ -37,3 +37,6 @@ jobs:
 
       - name: push to bucket
         run: aws s3 sync ./build s3://doc.gggpay.org
+
+      - name: push to bucket
+        run: aws s3 sync ./build s3://doc.safepay2u.com
